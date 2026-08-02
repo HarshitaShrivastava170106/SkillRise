@@ -1,0 +1,29 @@
+skillrise/
+│
+├── frontend/ (React)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.js
+│   │   │   ├── Hero.js
+│   │   │   ├── BlogFeed.js
+│   │   │   ├── Login.js
+│   │   │   ├── Register.js
+│   │   │   └── AdminDashboard.js
+│   │   ├── pages/
+│   │   │   ├── LandingPage.js
+│   │   │   ├── BlogsPage.js
+│   │   │   ├── TermsUser.js
+│   │   │   └── TermsAdmin.js
+│   │   ├── App.js
+│   │   └── index.js
+│   └── public/
+│       └── growreal_logo.png
+│
+├── backend/ (Node.js + Express)
+│   ├── server.js
+│   ├── models/
+│   │   ├── User.js
+│   │   └── Blog.js
+│   └── package.json
+│
+└── README.md

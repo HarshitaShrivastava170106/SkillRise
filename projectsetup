@@ -1,0 +1,9 @@
+# Frontend
+npx create-react-app skillrise
+cd skillrise
+npm install axios react-router-dom
+
+# Backend
+mkdir backend && cd backend
+npm init -y
+npm install express mongoose bcrypt jsonwebtoken cors stripe openai

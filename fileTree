@@ -1,0 +1,14 @@
+/src
+  /components
+    Header.js
+    Hero.js
+    BlogFeed.js
+    Login.js
+    Register.js
+    AdminDashboard.js
+  /pages
+    LandingPage.js
+    BlogsPage.js
+    TermsUser.js
+    TermsAdmin.js
+  App.js
