@@ -165,9 +165,9 @@ app.use((req, res, next) => {
   }
   next();
   res.json({ recommendations: aiResponse.choices[0].message.content.trim() });
-});
-
-app.get('/health', (req, res) => {
+ });
+  
+  app.get('/health', (req, res) => {
 
 app.use((err, req, res, next) => {
   console.error(err);
