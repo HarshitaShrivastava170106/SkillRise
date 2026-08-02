@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || '');
+const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
 const { OpenAI } = require('openai');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const User = require('./user');
@@ -147,14 +147,13 @@ app.get('/recommendations/:userId', async (req, res) => {
   const interests = user.interests.length ? user.interests.join(', ') : 'general learning';
   const prompt = `User interests: ${interests}. Recommend the most relevant blogs from this list: ${blogs.map(b => b.title).join(', ')}`;
   
-  const aiResponse = await openai.completions.create({
-    model: 'text-davinci-003',
-    prompt,
-    max_tokens: 150
-  });
-
-  res.json({ recommendations: aiResponse.choices[0].text.trim() });
+  const aiResponse = await openai.chat.completions.create({
+  model: 'gpt-3.5-turbo',
+  messages: [{ role: 'user', content: prompt }],
+  max_tokens: 150
 });
+
+res.json({ recommendations: aiResponse.choices[0].message.content.trim() });
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
