@@ -106,13 +106,19 @@ app.post('/blogs', isAdmin, async (req, res) => {
   res.json({ message: 'Blog posted successfully' });
 });
 
-// Get Blogs
+// Get Blogs with Pagination
 app.get('/blogs', async (req, res) => {
-  const { tag } = req.query;
-  const blogs = tag ? await Blog.find({ tags: tag }) : await Blog.find();
+  const { tag, page = 1, limit = 10 } = req.query;
+  const query = tag ? { tags: tag } : {};
+  const options = {
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sort: { createdAt: -1 }
+  };
+  
+  const blogs = await Blog.paginate(query, options);
   res.json(blogs);
 });
-
 // Like Blog
 app.post('/blogs/:id/like', async (req, res) => {
   const blog = await Blog.findById(req.params.id);
