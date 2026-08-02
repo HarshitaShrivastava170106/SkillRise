@@ -164,7 +164,10 @@ app.use((req, res, next) => {
     return res.sendFile(path.join(__dirname, 'public', 'index.html'));
   }
   next();
+  res.json({ recommendations: aiResponse.choices[0].message.content.trim() });
 });
+
+app.get('/health', (req, res) => {
 
 app.use((err, req, res, next) => {
   console.error(err);
